@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fahz-BlackNews</title>
+<title>DeepWeb | Official V1</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -205,14 +205,14 @@ textarea{
 <body>
 
 <header>
-    <div class="logo">Fahz-BlackNews</div>
+    <div class="logo">DeepWeb | BlackNews</div>
     <div class="hamburger" onclick="toggleSidebar()">☰</div>
 </header>
 
 <div class="sidebar" id="sidebar">
     <h3>Menu</h3>
     <a href="#" onclick="goHome()">Home</a>
-    <a href="#" onclick="openRequest()">Request Kasus</a>
+    <a href="#" onclick="openRequest()">Request</a>
 </div>
 
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
@@ -222,14 +222,14 @@ textarea{
 <!-- HERO -->
 <div class="hero" id="hero">
     <h1>Welcome To DeepWeb (Recode By Fahz)</h1>
-    <p>https://files.catbox.moe/d8h67z.png</p>
+    <p>Safe Browser For Indonesian People</p>
     <br>
-    <button class="btn" onclick="enterSite()">Masuk</button>
+    <button class="btn" onclick="enterSite()">Read News</button>
 </div>
 
 <!-- HOME -->
 <div id="home" style="display:none;">
-    <h2 style="margin-bottom:25px;">Daftar Berita</h2>
+    <h2 style="margin-bottom:25px;">Black News</h2>
     <div class="news-grid" id="newsList"></div>
 </div>
 
@@ -238,7 +238,7 @@ textarea{
 
 <!-- REQUEST -->
 <div class="request" id="requestPage">
-    <h2 style="margin-bottom:15px;">Request Kasus</h2>
+    <h2 style="margin-bottom:15px;">Request</h2>
     <textarea placeholder="Tulis pesan kamu disini..."></textarea>
     <button class="btn" onclick="goHome()">Back</button>
 </div>
@@ -277,9 +277,22 @@ function openRequest(){
 
 const newsData = [
 {
-title:"UIN VS PUBLIC",
-kronologi:"Perdebatan besar terjadi antara pihak UIN dan Public setelah isu viral menyebar di media sosial. Klarifikasi dan tanggapan resmi kemudian dirilis.",
-video:"https://youtube.com/"
+title:"Mahasiswa UIN Dibacok",
+kronologi:"Kampus Universitas Islam Negeri (UIN) Sultan Syarif Kasim (Suska) Riau geger pada Kamis (26/2/2026).
+
+Pasalnya, terjadi peristiwa pembacokan terhadap seorang mahasiswi UIN Sultan Syarif Kasim (Suska) Riau.
+
+Pelakunya adalah pacar korban yang juga seorang mahasiswa di kampus yang sama.
+
+Pemicu pembacokan yang terjadi di pagi hari tersebut ditengarai faktor asmara.
+
+Pelaku diduga sakit hati karena akan diputuskan oleh korban sehingga nekat melakukan pembacokan,
+
+
+
+Artikel ini telah tayang di SerambiNews.com dengan judul Mahasiswa Bacok Mahasiswi di Kampus Gegara Diputusin, Begini Kronologisnya, https://aceh.tribunnews.com/news/1013701/mahasiswa-bacok-mahasiswi-di-kampus-gegara-diputusin-begini-kronologisnya.
+",
+video:"https://aceimg.com/upload/?f=d0a10106c.mp4"
 },
 {
 title:"Kasus Viral Kota",
