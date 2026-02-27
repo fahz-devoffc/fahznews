@@ -5,123 +5,198 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fahz-BlackNews</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
-/* ====== GLOBAL ====== */
+:root{
+    --black:#000;
+    --dark:#111;
+    --gray:#222;
+    --border:#333;
+    --white:#fff;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
 body{
-    margin:0;
-    font-family: Arial, Helvetica, sans-serif;
-    background:#000;
-    color:#fff;
+    font-family:'Inter', sans-serif;
+    background:var(--black);
+    color:var(--white);
+    overflow-x:hidden;
 }
 
-h1,h2,h3{
-    margin:0;
-}
-
-button{
-    padding:10px 15px;
-    border:none;
-    cursor:pointer;
-    font-weight:bold;
-    background:#fff;
-    color:#000;
-    transition:0.3s;
-}
-
-button:hover{
-    background:#444;
-    color:#fff;
-}
-
-/* ===== HEADER ===== */
+/* HEADER */
 header{
-    background:#111;
-    padding:15px;
+    position:fixed;
+    width:100%;
+    top:0;
+    left:0;
+    background:rgba(0,0,0,0.95);
+    backdrop-filter:blur(10px);
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    border-bottom:1px solid #333;
+    align-items:center;
+    padding:18px 20px;
+    border-bottom:1px solid var(--border);
+    z-index:1000;
 }
 
 .logo{
-    font-size:20px;
-    font-weight:bold;
+    font-weight:700;
+    letter-spacing:1px;
 }
 
 .hamburger{
-    font-size:25px;
+    font-size:24px;
     cursor:pointer;
 }
 
-/* ===== SIDEBAR ===== */
+/* SIDEBAR */
 .sidebar{
     position:fixed;
     top:0;
-    left:-250px;
-    width:250px;
+    left:-260px;
+    width:260px;
     height:100%;
-    background:#111;
-    padding:20px;
-    transition:0.3s;
-    border-right:1px solid #333;
+    background:var(--dark);
+    border-right:1px solid var(--border);
+    padding:30px 20px;
+    transition:0.4s ease;
+    z-index:999;
 }
 
 .sidebar.active{
     left:0;
 }
 
+.sidebar h3{
+    margin-bottom:25px;
+    font-weight:600;
+}
+
 .sidebar a{
     display:block;
-    color:#fff;
+    margin-bottom:15px;
     text-decoration:none;
-    margin:15px 0;
+    color:var(--white);
+    padding:10px;
+    border-radius:6px;
+    transition:0.3s;
 }
 
 .sidebar a:hover{
-    color:#aaa;
+    background:var(--gray);
 }
 
-/* ===== CONTENT ===== */
-.container{
-    padding:20px;
+/* OVERLAY */
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.6);
+    opacity:0;
+    pointer-events:none;
+    transition:0.3s;
+    z-index:998;
+}
+
+.overlay.active{
+    opacity:1;
+    pointer-events:all;
+}
+
+/* MAIN */
+main{
+    padding:100px 20px 40px;
+    max-width:900px;
+    margin:auto;
+    transition:0.3s;
+}
+
+/* HERO LOGO SCREEN */
+.hero{
+    text-align:center;
+    margin-top:100px;
+}
+
+.hero h1{
+    font-size:32px;
+    margin-bottom:15px;
+}
+
+.btn{
+    padding:10px 18px;
+    border:1px solid var(--white);
+    background:none;
+    color:var(--white);
+    cursor:pointer;
+    border-radius:6px;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:var(--white);
+    color:var(--black);
+}
+
+/* NEWS CARD */
+.news-grid{
+    display:grid;
+    gap:20px;
 }
 
 .news-card{
-    background:#111;
-    padding:15px;
-    margin-bottom:15px;
-    border:1px solid #333;
+    background:var(--dark);
+    border:1px solid var(--border);
+    padding:20px;
+    border-radius:10px;
+    transition:0.3s;
+}
+
+.news-card:hover{
+    transform:translateY(-5px);
+    border-color:#555;
 }
 
 .news-card h3{
-    margin-bottom:10px;
+    margin-bottom:15px;
 }
 
+/* DETAIL */
 .detail{
     display:none;
-    background:#111;
-    padding:20px;
-    border:1px solid #333;
+    animation:fade 0.4s ease;
 }
 
-/* ===== REQUEST PAGE ===== */
-.request-page{
+@keyframes fade{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* REQUEST */
+.request{
     display:none;
 }
 
 textarea{
     width:100%;
-    height:120px;
-    background:#000;
-    color:#fff;
-    border:1px solid #333;
-    padding:10px;
+    height:140px;
+    background:var(--dark);
+    border:1px solid var(--border);
+    color:var(--white);
+    padding:15px;
+    border-radius:8px;
+    resize:none;
+    margin-bottom:15px;
 }
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:768px){
-    .container{
-        padding:15px;
+/* RESPONSIVE */
+@media(max-width:600px){
+    .hero h1{
+        font-size:24px;
     }
 }
 </style>
@@ -134,118 +209,113 @@ textarea{
     <div class="hamburger" onclick="toggleSidebar()">☰</div>
 </header>
 
-<!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
-    <a href="#" onclick="showHome()">Home</a>
-    <a href="#" onclick="showRequest()">Request Kasus</a>
+    <h3>Menu</h3>
+    <a href="#" onclick="goHome()">Home</a>
+    <a href="#" onclick="openRequest()">Request Kasus</a>
 </div>
 
-<!-- LOGO SCREEN -->
-<div class="container" id="logoScreen" style="text-align:center; margin-top:100px;">
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<main>
+
+<!-- HERO -->
+<div class="hero" id="hero">
     <h1>LOGO FAHZ-BLACKNEWS</h1>
-    <p>(Ganti dengan logo kamu nanti)</p>
+    <p>Silakan ganti dengan logo kamu</p>
     <br>
-    <button onclick="enterSite()">Masuk</button>
+    <button class="btn" onclick="enterSite()">Masuk</button>
 </div>
 
-<!-- HOME NEWS -->
-<div class="container" id="homePage" style="display:none;">
-    <h2>Daftar Berita</h2>
-    <br>
-    <div id="newsList"></div>
+<!-- HOME -->
+<div id="home" style="display:none;">
+    <h2 style="margin-bottom:25px;">Daftar Berita</h2>
+    <div class="news-grid" id="newsList"></div>
 </div>
 
-<!-- DETAIL PAGE -->
-<div class="container detail" id="detailPage"></div>
+<!-- DETAIL -->
+<div class="detail" id="detailPage"></div>
 
-<!-- REQUEST PAGE -->
-<div class="container request-page" id="requestPage">
-    <h2>Request Kasus</h2>
-    <br>
+<!-- REQUEST -->
+<div class="request" id="requestPage">
+    <h2 style="margin-bottom:15px;">Request Kasus</h2>
     <textarea placeholder="Tulis pesan kamu disini..."></textarea>
-    <br><br>
-    <button onclick="showHome()">Back</button>
+    <button class="btn" onclick="goHome()">Back</button>
 </div>
+
+</main>
 
 <script>
-
-/* ===== SIDEBAR ===== */
 function toggleSidebar(){
-    document.getElementById("sidebar").classList.toggle("active");
+    document.getElementById("sidebar").classList.add("active");
+    document.getElementById("overlay").classList.add("active");
 }
 
-/* ===== NAVIGATION ===== */
+function closeSidebar(){
+    document.getElementById("sidebar").classList.remove("active");
+    document.getElementById("overlay").classList.remove("active");
+}
+
 function enterSite(){
-    document.getElementById("logoScreen").style.display="none";
-    document.getElementById("homePage").style.display="block";
+    document.getElementById("hero").style.display="none";
+    document.getElementById("home").style.display="block";
 }
 
-function showHome(){
+function goHome(){
     document.getElementById("detailPage").style.display="none";
     document.getElementById("requestPage").style.display="none";
-    document.getElementById("homePage").style.display="block";
-    toggleSidebar();
+    document.getElementById("home").style.display="block";
+    closeSidebar();
 }
 
-function showRequest(){
-    document.getElementById("homePage").style.display="none";
+function openRequest(){
+    document.getElementById("home").style.display="none";
     document.getElementById("detailPage").style.display="none";
     document.getElementById("requestPage").style.display="block";
-    toggleSidebar();
+    closeSidebar();
 }
 
-/* ===== DATA BERITA ===== */
 const newsData = [
 {
-    title: "UIN VS PUBLIC",
-    kronologi: "Terjadi perdebatan antara pihak UIN dan pihak Public terkait isu yang sedang viral. Kronologi lengkap dimulai dari postingan media sosial hingga klarifikasi resmi.",
-    video: "https://youtube.com/"
+title:"UIN VS PUBLIC",
+kronologi:"Perdebatan besar terjadi antara pihak UIN dan Public setelah isu viral menyebar di media sosial. Klarifikasi dan tanggapan resmi kemudian dirilis.",
+video:"https://youtube.com/"
 },
 {
-    title: "Kasus Viral Kota",
-    kronologi: "Kasus ini bermula dari laporan warga dan menjadi viral setelah tersebar di berbagai platform.",
-    video: "https://youtube.com/"
+title:"Kasus Viral Kota",
+kronologi:"Kasus ini bermula dari laporan masyarakat dan menjadi viral dalam waktu singkat.",
+video:"https://youtube.com/"
 }
 ];
 
-/* ===== TAMPILKAN BERITA ===== */
 const newsList = document.getElementById("newsList");
 
-newsData.forEach((news, index)=>{
-    const card = document.createElement("div");
-    card.classList.add("news-card");
-
-    card.innerHTML = `
+newsData.forEach((news,index)=>{
+    newsList.innerHTML += `
+    <div class="news-card">
         <h3>${news.title}</h3>
-        <button onclick="openDetail(${index})">Baca Berita</button>
-    `;
-
-    newsList.appendChild(card);
+        <button class="btn" onclick="openDetail(${index})">Baca Berita</button>
+    </div>`;
 });
 
-/* ===== DETAIL BERITA ===== */
 function openDetail(index){
-    const news = newsData[index];
+    const data = newsData[index];
+    document.getElementById("home").style.display="none";
+    const detail = document.getElementById("detailPage");
 
-    document.getElementById("homePage").style.display="none";
-    const detailPage = document.getElementById("detailPage");
-
-    detailPage.innerHTML = `
-        <h2>${news.title}</h2>
-        <br>
-        <h3>Kronologi</h3>
-        <p>${news.kronologi}</p>
-        <br>
-        <a href="${news.video}" target="_blank">
-            <button>Link Video</button>
-        </a>
-        <br><br>
-        <button onclick="showHome()">Kembali</button>
+    detail.innerHTML = `
+    <h2 style="margin-bottom:15px;">${data.title}</h2>
+    <h3 style="margin-bottom:10px;">Kronologi</h3>
+    <p style="margin-bottom:20px; line-height:1.6;">${data.kronologi}</p>
+    <a href="${data.video}" target="_blank">
+        <button class="btn">Link Video</button>
+    </a>
+    <br><br>
+    <button class="btn" onclick="goHome()">Kembali</button>
     `;
 
-    detailPage.style.display="block";
+    detail.style.display="block";
 }
-
 </script>
 
 </body>
